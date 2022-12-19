@@ -2,8 +2,8 @@
 
 // gestion des icons
 
-// if($_POST)
-// {
+
+
     foreach ($_POST as $key => $value)
     {
         $_POST[$key] = htmlentities(addslashes($value));
@@ -97,16 +97,15 @@ if (isset($_GET['action']) && $_GET['action'] == 'suppression')
     header('admin_services.php');
 }
 
+// La modification NE MARCHE PAS AU SCOURS
+
 if (isset($_GET['action']) && $_GET['action'] == 'modification')
 {
-    $pdo -> query("UPDATE services WHERE id_services = '$_GET[id_services]'");
+    $pdo -> query("UPDATE services SET icon = '$_POST[icon]', name = '$_POST[name]', description = '$_POST[description]' WHERE id_services = '$_GET[id_services]");
 
-    $content .= '<div class="alert alert-success">Le service a bien été modifié</div>';
-
-    $_GET['action'] = 'affichage';
-
-    header('admin_services.php');
 }
+
+header('admin_services.php');
 
 // afficher la liste des services et pouvoir les modifier et les supprimer
 
